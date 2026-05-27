@@ -63,6 +63,20 @@ CREATE TABLE Attendance (
     leave_id INT
 );
 
+-- Role Permissio Table
+CREATE TABLE Role_Permissions
+    rolePermissions_id FOREIGN KEY REFERENCES INT NOT NULL
+    role_id INT,
+    permissions_id INT
+);
+
+
+-- User Account Table (Park table)
+CREATE TABLE User_Account
+    user_id INT,
+    employee_id INT
+    role_id INT
+
 -- Overtime table
 CREATE TABLE Overtime (
     overtime_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -99,3 +113,4 @@ FROM [MotorPH Employee Attendance Records];
 Go
 
 SELECT * FROM Attendance;
+
