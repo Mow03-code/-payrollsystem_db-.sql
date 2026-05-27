@@ -84,3 +84,4 @@ INSERT INTO Employee (employee_id, last_name, first_name, birthday, basic_salary
 SELECT [Employee], Last_Name, First_Name, Birthday, Basic_Salary, Hourly_Rate
 From [MotorPH Employee Data v2];
 
+
