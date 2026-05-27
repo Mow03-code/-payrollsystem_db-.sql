@@ -29,6 +29,7 @@ CREATE TABLE Status (
     attendance_id INT,
     status_approval INT
 );
+
 -- Employee Details Table
 CREATE TABLE Employee (
     employee_id INT PRIMARY KEY,
@@ -63,19 +64,20 @@ CREATE TABLE Attendance (
     leave_id INT
 );
 
--- Role Permissio Table
-CREATE TABLE Role_Permissions
-    rolePermissions_id FOREIGN KEY REFERENCES INT NOT NULL
+-- Role Permission Table
+CREATE TABLE Role_Permissions (
+    rolePermissions_id INT NOT NULL,
     role_id INT,
     permissions_id INT
 );
 
-
--- User Account Table (Park table)
-CREATE TABLE User_Account
+-- User Account Table
+CREATE TABLE User_Account (
     user_id INT,
-    employee_id INT
+    employee_id INT,
+    password VARCHAR(255),
     role_id INT
+);
 
 -- Overtime table
 CREATE TABLE Overtime (
@@ -114,3 +116,8 @@ Go
 
 SELECT * FROM Attendance;
 
+-- testing Overtime computation
+INSERT INTO Attendance (employee_id, date, time_in, time_out)
+SELECT
+    [Employee],
+    
