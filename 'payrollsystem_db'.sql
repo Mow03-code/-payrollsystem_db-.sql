@@ -159,3 +159,18 @@ INSERT INTO Attendance (employee_id, date, time_in, time_out)
 SELECT
     [Employee],
     
+-- Display Employee Details in a Table
+
+SELECT 
+    employee_id AS "Employee ID",
+    first_name AS "First Name",
+    last_name AS "Last Name",
+    birthdate AS "Birthdate",
+    gender AS "Gender",
+    phone_number AS "Phone Number",
+    date_hired AS "Date Hired",
+    employment_status AS "Employment Status",
+    basic_salary AS "Basic Salary",
+    hourly_rate AS "Hourly Rate",
+    grossMonthly_rate AS "Gross Monthly Rate"
+FROM Employee;
