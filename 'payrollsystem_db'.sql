@@ -7,6 +7,64 @@ CREATE TABLE Department (
     departmentType_id INT
 );
 
+-- Payroll Table
+CREATE TABLE Payroll (
+    payroll_id INT,
+    employee_id INT,
+    payPeriod_id INT,
+    basic_salary DECIMAL(10,2),
+    overtime_pay DECIMAL(10,2),
+    holiday_pay DECIMAL(10,2),
+    other_earnings DECIMAL(10,2),
+    sss_contribution DECIMAL(10,2),
+    philhealth DECIMAL(10,2),
+    pagibig DECIMAL(10,2),
+    tax_withheld DECIMAL(10,2),
+    absenses_deduction DECIMAL(10,2),
+    loans_deduction DECIMAL(10,2),
+    other_deductions DECIMAL(10,2)
+);
+
+-- Payroll Benefits
+CREATE TABLE Payroll_Benefits (
+    payroll_benefit_id INT,
+    benefit_id INT,
+    payroll_id INT,
+    amount DECIMAL(10,2),
+    remarks VARCHAR(50)
+);
+
+-- Pay period Table
+CREATE TABLE Pay_Period (
+    payroll_id INT,
+    start_date DATE,
+    end_date DATE
+);
+
+-- Earnings Table
+CREATE TABLE Earnings (
+    compensation_id INT,
+    net_earnings DECIMAL(10,2),
+    gross_earnings DECIMAL(10,2)
+);
+
+-- Benefits Table
+CREATE TABLE Benefits (
+    benefit_id INT,
+    benefitType_id INT,
+    remarks VARCHAR(50)
+);
+
+-- Benefit Type Table
+CREATE TABLE Benefit_Type (
+    benefitType_id INT,
+    benefit_name VARCHAR(50),
+    description VARCHAR(100),
+    isTaxable BOOLEAN,
+    calculation_type VARCHAR(30),
+    rateValue DECIMAL(10,2)
+);
+
 --  Position Table
 CREATE TABLE Position (
     position_id INT IDENTITY(1,1) PRIMARY KEY,
@@ -92,44 +150,6 @@ CREATE TABLE Overtime (
     approval_status VARCHAR(50)
 )
 
--- Deduction Type Table
-CREATE TABLE DeductionType (
-    deductionType_id    INT             IDENTITY(1,1) PRIMARY KEY,
-    type_name           VARCHAR(50)     NOT NULL,
-    isMandatory         BOOLEAN         NOT NULL DEFAULT FALSE,
-    calculation_type    VARCHAR(30)     NOT NULL,
-    rate_or_formula     DECIMAL(10,2)   NULL
-);
-
--- TaxBracket Table
-CREATE TABLE TaxBracket (
-    bracket_id          INT             IDENTITY(1,1) PRIMARY KEY,
-    taxable_income_min  DECIMAL(10,2)   NOT NULL,
-    taxable_income_max  DECIMAL(10,2)   NOT NULL,
-    base_tax            DECIMAL(10,2)   NOT NULL,
-    excess_rate         DECIMAL(10,2)   NOT NULL,
-    is_active           BOOLEAN         NOT NULL DEFAULT TRUE
-);
-
--- Deductions Table
-CREATE TABLE Deductions (
-    deduction_id        INT             IDENTITY(1,1) PRIMARY KEY,
-    payroll_id          INT             NOT NULL,
-    deductionType_id    INT             NOT NULL,
-    pagbig              DECIMAL(10,2)   NOT NULL DEFAULT 0.00,
-    amount              DECIMAL(10,2)   NOT NULL,
-    remarks             VARCHAR(100)    NULL
-);
-
--- PayrollDeduction Table
-CREATE TABLE PayrollDeduction (
-    payroll_deduction_id    INT             IDENTITY(1,1) PRIMARY KEY,
-    payroll_id              INT             NOT NULL,
-    deduction_id            INT             NOT NULL,
-    amount                  DECIMAL(10,2)   NOT NULL,
-    remarks                 VARCHAR(100)    NULL
-);    
-    
 -- testing tables
 Use payrollsystem_db;
 Go
@@ -159,18 +179,3 @@ INSERT INTO Attendance (employee_id, date, time_in, time_out)
 SELECT
     [Employee],
     
--- Display Employee Details in a Table
-
-SELECT 
-    employee_id AS "Employee ID",
-    first_name AS "First Name",
-    last_name AS "Last Name",
-    birthdate AS "Birthdate",
-    gender AS "Gender",
-    phone_number AS "Phone Number",
-    date_hired AS "Date Hired",
-    employment_status AS "Employment Status",
-    basic_salary AS "Basic Salary",
-    hourly_rate AS "Hourly Rate",
-    grossMonthly_rate AS "Gross Monthly Rate"
-FROM Employee;
