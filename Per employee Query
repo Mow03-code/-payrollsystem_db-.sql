@@ -1,0 +1,1 @@
+SELECT * FROM vw_EmployeePayslip WHERE employee_id = 10016;
